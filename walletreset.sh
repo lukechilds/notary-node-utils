@@ -15,6 +15,9 @@ cli=komodo-cli
 nn_address=RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3
 # Arguments to pass to daemon on restart
 daemon_args="-gen -genproclimit=1"
+# Process regex to grep processes while we're waiting for it to exit
+# e.g "komodod.*\-notary"
+daemon_process_regex="komodod.*\-notary"
 
 source ~/komodo/src/pubkey.txt
 DATE=$(date +%Y-%m-%d:%H:%M:%S)
@@ -53,7 +56,7 @@ echo "[$coin] wait for deamon to stop"
 stopped=0
 while [[ $stopped -eq 0 ]]; do
   sleep 10
-  pgrep -a komodod | grep 'komodod.*\-notary'
+  pgrep -a komodod | grep "$daemon_process_regex"
   outcome=$(echo $?)
   if [[ $outcome -ne 0 ]]; then
     stopped=1
