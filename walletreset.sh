@@ -1,27 +1,25 @@
 #!/bin/bash
 
+source ~/komodo/src/pubkey.txt
+DATE=$(date +%Y-%m-%d:%H:%M:%S)
+current_dir=$(echo $PWD)
+
 # Coin we're resetting
 coin=KMD
 # daemon data directory where wallet.dat exists
 # e.g ~/.komodo
 data_dir=~/.komodo
-# Path to daemon
-# e.g komodod
-daemon=komodod
+# Full daemon comand with arguments
+# e.g komodod -notary -pubkey=<pubkey>
+daemon="komodod -gen -genproclimit=1 -notary -pubkey=$pubkey"
 # Path to daemon cli
 # e.g komodo-cli
 cli=komodo-cli
 # Address containing all your funds
 nn_address=RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3
-# Arguments to pass to daemon on restart
-daemon_args="-gen -genproclimit=1"
 # Process regex to grep processes while we're waiting for it to exit
 # e.g "komodod.*\-notary"
 daemon_process_regex="komodod.*\-notary"
-
-source ~/komodo/src/pubkey.txt
-DATE=$(date +%Y-%m-%d:%H:%M:%S)
-current_dir=$(echo $PWD)
 
 waitforconfirm () {
   sleep 15
@@ -69,7 +67,7 @@ mv wallet.dat wallet.dat.$DATE.bak
 cd $current_dir
 
 echo "[$coin] restart the komodo deamon, it will generate a new empty wallet.dat on start"
-$daemon -notary -pubkey=$pubkey $daemon_args > /dev/null 2>&1 &
+$daemon > /dev/null 2>&1 &
 
 echo "[$coin] wait for deamon to start"
 started=0
