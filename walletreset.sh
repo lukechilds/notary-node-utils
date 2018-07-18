@@ -56,7 +56,7 @@ echo "[$coin] wait for deamon to stop"
 stopped=0
 while [[ $stopped -eq 0 ]]; do
   sleep 10
-  pgrep -a komodod | grep "$daemon_process_regex"
+  pgrep -f "$daemon_process_regex"
   outcome=$(echo $?)
   if [[ $outcome -ne 0 ]]; then
     stopped=1
