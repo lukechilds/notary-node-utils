@@ -27,7 +27,7 @@ nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
 
 echo "
 =========================================================================
-Resetting ${coin} wallet
+Resetting ${coin} wallet ${DATE}
 =========================================================================
 coin: \"${coin}\"
 daemon: \"${daemon}\"
