@@ -47,27 +47,28 @@ waitforconfirm () {
   done
 }
 
-echo "[$coin] Get temp address and privkey, best to use new one each time to avoid bloating wallet."
+echo "[$coin] Generating temp address"
 temp_address=$($cli getnewaddress)
 temp_privkey=$($cli dumpprivkey $temp_address)
+echo "[$coin] Temp address: $temp_address"
 
-echo "[$coin] Save the NN privkey to a variable so we can import it later."
+echo "[$coin] Saving the NN privkey to a variable so we can import it later"
 NNprivkey=$($cli dumpprivkey $nn_address)
 
-echo "[$coin] Save the temp privkey to a file, incase something goes wrong we can import it to recover funds"
+echo "[$coin] Writing the temp privkey to a file incase something goes wrong"
 echo $temp_privkey >> "${coin}_temp_privkeys"
 
-echo "[$coin] Send entire balance to the new adress"
+echo "[$coin] Sending entire balance to the new adress"
 txid=$($cli sendtoaddress $temp_address $($cli getbalance) "" "" true)
-echo "[$coin] $txid"
+echo "[$coin] Balance sent: $txid"
 
-echo "[$coin] Check for confirmation of received funds"
+echo "[$coin] Waiting for confirmation of sent funds"
 waitforconfirm $txid
+echo "[$coin] Sent funds confirmed"
 
-echo "[$coin] stop the deamon"
+echo "[$coin] Stopping the deamon"
 $cli stop
 
-echo "[$coin] wait for deamon to stop"
 stopped=0
 while [[ $stopped -eq 0 ]]; do
   sleep 10
@@ -78,15 +79,14 @@ while [[ $stopped -eq 0 ]]; do
   fi
 done
 
-echo "[$coin] move your old wallet, then return to our working directory"
+echo "[$coin] Moving wallet.dat to wallet.dat.${DATE}.bak"
 cd $data_dir
 mv wallet.dat wallet.dat.$DATE.bak
 cd $current_dir
 
-echo "[$coin] restart the komodo deamon, it will generate a new empty wallet.dat on start"
+echo "[$coin] Restarting the daemon"
 $daemon > /dev/null 2>&1 &
 
-echo "[$coin] wait for deamon to start"
 started=0
 while [[ $started -eq 0 ]]; do
   sleep 15
@@ -97,15 +97,18 @@ while [[ $started -eq 0 ]]; do
   fi
 done
 
-echo "[$coin] import the private keys, we rescan for new address but not for NN address"
+echo "[$coin] Importing the temp privkey and rescanning for funds"
 $cli importprivkey $temp_privkey
+
+echo "[$coin] Importing the NN privkey but without rescanning"
 $cli importprivkey $NNprivkey "" false
 
-echo "[$coin] Send the entire balance to the NN address"
+echo "[$coin] Sending entire balance back to NN address"
 txid=$($cli sendtoaddress $nn_address $($cli getbalance) "" "" true)
-echo "[$coin] $txid"
+echo "[$coin] Balance returned: $txid"
 
-echo "[$coin] Check for confirmation of received funds"
+echo "[$coin] Waiting for confirmation of returned funds"
 waitforconfirm $txid
+echo "[$coin] Returned funds confirmed"
 
-echo "[$coin] Process complete... please launch m_notary and carry out acsplit KMD"
+echo "[$coin] Complete!"
