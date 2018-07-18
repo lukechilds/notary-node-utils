@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ~/komodo/src/pubkey.txt
-DATE=$(date +%Y-%m-%d:%H:%M:%S)
+date=$(date +%Y-%m-%d:%H:%M:%S)
 
 # Coin we're resetting
 coin="KMD"
@@ -27,7 +27,7 @@ nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
 
 echo "
 =========================================================================
-Resetting ${coin} wallet ${DATE}
+Resetting ${coin} wallet ${date}
 =========================================================================
 coin: \"${coin}\"
 daemon: \"${daemon}\"
@@ -79,7 +79,7 @@ while [[ $stopped -eq 0 ]]; do
 done
 
 echo "[$coin] Backing up and removing wallet file"
-mv "$wallet_file" "${wallet_file}.${DATE}.bak"
+mv "$wallet_file" "${wallet_file}.${date}.bak"
 
 echo "[$coin] Restarting the daemon"
 $daemon > /dev/null 2>&1 &
