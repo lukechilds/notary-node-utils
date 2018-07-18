@@ -26,6 +26,18 @@ data_dir="${HOME}/.komodo"
 # Address containing all your funds
 nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
 
+echo "
+=========================================================================
+Resetting ${coin} wallet
+=========================================================================
+coin: \"${coin}\"
+daemon: \"${daemon}\"
+daemon_process_regex: \"${daemon_process_regex}\"
+cli: \"${cli}\"
+data_dir: \"${data_dir}\"
+nn_address: \"${nn_address}\"
+========================================================================="
+
 waitforconfirm () {
   sleep 15
   confirmations=0
