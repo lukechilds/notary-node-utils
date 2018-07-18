@@ -32,18 +32,18 @@ waitforconfirm () {
   done
 }
 
-echo "[$coin] Get new address and privkey for it, best to use new one each time to avoid bloating wallet."
-new_address=$($cli getnewaddress)
-new_privkey=$($cli dumpprivkey $new_address)
+echo "[$coin] Get temp address and privkey, best to use new one each time to avoid bloating wallet."
+temp_address=$($cli getnewaddress)
+temp_privkey=$($cli dumpprivkey $temp_address)
 
 echo "[$coin] Save the NN privkey to a variable so we can import it later."
 NNprivkey=$($cli dumpprivkey $nn_address)
 
-echo "[$coin] Add the new privkey to a file, incase something goes wrong we can import it to recover funds"
-echo $new_privkey >> new_addressPrivKey
+echo "[$coin] Save the temp privkey to a file, incase something goes wrong we can import it to recover funds"
+echo $temp_privkey >> "${coin}_temp_privkeys"
 
 echo "[$coin] Send entire balance to the new adress"
-txid=$($cli sendtoaddress $new_address $($cli getbalance) "" "" true)
+txid=$($cli sendtoaddress $temp_address $($cli getbalance) "" "" true)
 echo "[$coin] $txid"
 
 echo "[$coin] Check for confirmation of received funds"
@@ -83,7 +83,7 @@ while [[ $started -eq 0 ]]; do
 done
 
 echo "[$coin] import the private keys, we rescan for new address but not for NN address"
-$cli importprivkey $new_privkey
+$cli importprivkey $temp_privkey
 $cli importprivkey $NNprivkey "" false
 
 echo "[$coin] Send the entire balance to the NN address"
