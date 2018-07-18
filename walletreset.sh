@@ -37,6 +37,8 @@ wallet_file: \"${wallet_file}\"
 nn_address: \"${nn_address}\"
 ========================================================================="
 
+echo "[$coin] Resetting ${coin} wallet - ${date}"
+
 waitforconfirm () {
   sleep 15
   confirmations=0
