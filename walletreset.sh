@@ -2,7 +2,6 @@
 
 source ~/komodo/src/pubkey.txt
 DATE=$(date +%Y-%m-%d:%H:%M:%S)
-current_dir=$(echo $PWD)
 
 # Coin we're resetting
 coin="KMD"
@@ -19,9 +18,9 @@ daemon_process_regex="komodod.*\-notary"
 # e.g komodo-cli
 cli="komodo-cli"
 
-# daemon data directory where wallet.dat exists
-# e.g ~/.komodo
-data_dir="${HOME}/.komodo"
+# Path to wallet.dat
+# e.g ~/.komodo/wallet.dat
+wallet_file="${HOME}/.komodo/wallet.dat"
 
 # Address containing all your funds
 nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
@@ -34,7 +33,7 @@ coin: \"${coin}\"
 daemon: \"${daemon}\"
 daemon_process_regex: \"${daemon_process_regex}\"
 cli: \"${cli}\"
-data_dir: \"${data_dir}\"
+wallet_file: \"${wallet_file}\"
 nn_address: \"${nn_address}\"
 ========================================================================="
 
@@ -79,10 +78,8 @@ while [[ $stopped -eq 0 ]]; do
   fi
 done
 
-echo "[$coin] Moving wallet.dat to wallet.dat.${DATE}.bak"
-cd $data_dir
-mv wallet.dat wallet.dat.$DATE.bak
-cd $current_dir
+echo "[$coin] Backing up and removing wallet file"
+mv "$wallet_file" "${wallet_file}.${DATE}.bak"
 
 echo "[$coin] Restarting the daemon"
 $daemon > /dev/null 2>&1 &
