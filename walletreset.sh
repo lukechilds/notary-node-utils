@@ -5,21 +5,26 @@ DATE=$(date +%Y-%m-%d:%H:%M:%S)
 current_dir=$(echo $PWD)
 
 # Coin we're resetting
-coin=KMD
-# daemon data directory where wallet.dat exists
-# e.g ~/.komodo
-data_dir=~/.komodo
+coin="KMD"
+
 # Full daemon comand with arguments
 # e.g komodod -notary -pubkey=<pubkey>
 daemon="komodod -gen -genproclimit=1 -notary -pubkey=$pubkey"
-# Path to daemon cli
-# e.g komodo-cli
-cli=komodo-cli
-# Address containing all your funds
-nn_address=RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3
-# Process regex to grep processes while we're waiting for it to exit
+
+# Daemon process regex to grep processes while we're waiting for it to exit
 # e.g "komodod.*\-notary"
 daemon_process_regex="komodod.*\-notary"
+
+# Path to daemon cli
+# e.g komodo-cli
+cli="komodo-cli"
+
+# daemon data directory where wallet.dat exists
+# e.g ~/.komodo
+data_dir="${HOME}/.komodo"
+
+# Address containing all your funds
+nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
 
 waitforconfirm () {
   sleep 15
