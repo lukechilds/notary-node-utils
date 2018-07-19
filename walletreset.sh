@@ -1,29 +1,28 @@
 #!/bin/bash
 
-source ~/komodo/src/pubkey.txt
-date=$(date +%Y-%m-%d:%H:%M:%S)
-
 # Coin we're resetting
-coin="KMD"
+coin=$1
 
 # Full daemon comand with arguments
 # e.g komodod -notary -pubkey=<pubkey>
-daemon="komodod -gen -genproclimit=1 -notary -pubkey=$pubkey"
+daemon=$2
 
 # Daemon process regex to grep processes while we're waiting for it to exit
 # e.g "komodod.*\-notary"
-daemon_process_regex="komodod.*\-notary"
+daemon_process_regex=$3
 
 # Path to daemon cli
 # e.g komodo-cli
-cli="komodo-cli"
+cli=$4
 
 # Path to wallet.dat
 # e.g ~/.komodo/wallet.dat
-wallet_file="${HOME}/.komodo/wallet.dat"
+wallet_file=$5
 
 # Address containing all your funds
-nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
+nn_address=$6
+
+date=$(date +%Y-%m-%d:%H:%M:%S)
 
 echo "
 =========================================================================
