@@ -5,7 +5,7 @@ source ~/komodo/src/pubkey.txt
 # Coin we're resetting
 coin=$1
 
-daemon="komodod $(./listassetchainparams | grep ${coin}) -pubkey=${pubkey}"
+daemon="komodod $(./listassetchainparams ${coin}) -pubkey=${pubkey}"
 daemon_process_regex="komodod.*\-ac_name=${coin}"
 cli="komodo-cli -ac_name=${coin}"
 wallet_file="${HOME}/.komodo/${coin}/wallet.dat"
