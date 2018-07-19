@@ -24,18 +24,6 @@ nn_address=$6
 
 date=$(date +%Y-%m-%d:%H:%M:%S)
 
-echo "
-=========================================================================
-Resetting ${coin} wallet ${date}
-=========================================================================
-coin: \"${coin}\"
-daemon: \"${daemon}\"
-daemon_process_regex: \"${daemon_process_regex}\"
-cli: \"${cli}\"
-wallet_file: \"${wallet_file}\"
-nn_address: \"${nn_address}\"
-========================================================================="
-
 echo "[${coin}] Resetting ${coin} wallet - ${date}"
 
 waitforconfirm () {
