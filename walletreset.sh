@@ -22,7 +22,7 @@ wallet_file=$5
 
 # Address containing all your funds
 # e.g "RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
-nn_address=$6
+address=$6
 
 date=$(date +%Y-%m-%d:%H:%M:%S)
 
@@ -42,13 +42,13 @@ temp_address=$(${cli} getnewaddress)
 temp_privkey=$(${cli} dumpprivkey ${temp_address})
 echo "[${coin}] Temp address: ${temp_address}"
 
-echo "[${coin}] Saving the NN privkey to a variable so we can import it later"
-nn_privkey=$(${cli} dumpprivkey ${nn_address})
+echo "[${coin}] Saving the main address privkey to reimport later"
+privkey=$(${cli} dumpprivkey ${address})
 
 echo "[${coin}] Writing the temp privkey to a file incase something goes wrong"
 echo ${temp_privkey} >> "${coin}_temp_privkeys"
 
-echo "[${coin}] Sending entire balance to the new adress"
+echo "[${coin}] Sending entire balance to the temp adress"
 txid=$(${cli} sendtoaddress ${temp_address} $(${cli} getbalance) "" "" true)
 echo "[${coin}] Balance sent: ${txid}"
 
@@ -88,11 +88,11 @@ done
 echo "[${coin}] Importing the temp privkey and rescanning for funds"
 ${cli} importprivkey ${temp_privkey}
 
-echo "[${coin}] Importing the NN privkey but without rescanning"
-${cli} importprivkey ${nn_privkey} "" false
+echo "[${coin}] Importing the main privkey but without rescanning"
+${cli} importprivkey ${privkey} "" false
 
-echo "[${coin}] Sending entire balance back to NN address"
-txid=$(${cli} sendtoaddress ${nn_address} $(${cli} getbalance) "" "" true)
+echo "[${coin}] Sending entire balance back to main address"
+txid=$(${cli} sendtoaddress ${address} $(${cli} getbalance) "" "" true)
 echo "[${coin}] Balance returned: ${txid}"
 
 echo "[${coin}] Waiting for confirmation of returned funds"
