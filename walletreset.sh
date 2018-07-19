@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Coin we're resetting
+# e.g KMD
 coin=$1
 
 # Full daemon comand with arguments
