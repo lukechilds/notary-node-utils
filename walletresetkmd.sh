@@ -3,7 +3,7 @@
 source ~/komodo/src/pubkey.txt
 
 coin="KMD"
-daemon="komodod -gen -genproclimit=1 -notary -pubkey=${pubkey}"
+daemon="komodod -notary -pubkey=${pubkey}"
 daemon_process_regex="komodod.*\-notary"
 cli="komodo-cli"
 wallet_file="${HOME}/.komodo/wallet.dat"
