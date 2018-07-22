@@ -62,7 +62,7 @@ ${cli} stop
 stopped=0
 while [[ ${stopped} -eq 0 ]]; do
   sleep 10
-  pgrep -f "${daemon_process_regex}" > /dev/null 2>&1
+  pgrep -af "${daemon_process_regex}" | grep -v "$0" > /dev/null 2>&1
   outcome=$(echo $?)
   if [[ ${outcome} -ne 0 ]]; then
     stopped=1
