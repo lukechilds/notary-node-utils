@@ -51,7 +51,7 @@ echo ${temp_privkey} >> "${coin}_temp_privkeys"
 
 echo "[${coin}] Sending entire balance to the temp adress"
 txid=$(${cli} sendtoaddress ${temp_address} $(${cli} getbalance) "" "" true)
-echo "[${coin}] Balance sent: ${txid}"
+echo "[${coin}] Balance sent TXID: ${txid}"
 
 echo "[${coin}] Waiting for confirmation of sent funds"
 waitforconfirm ${txid}
@@ -94,7 +94,7 @@ ${cli} importprivkey ${privkey} "" false
 
 echo "[${coin}] Sending entire balance back to main address"
 txid=$(${cli} sendtoaddress ${address} $(${cli} getbalance) "" "" true)
-echo "[${coin}] Balance returned: ${txid}"
+echo "[${coin}] Balance returned TXID: ${txid}"
 
 echo "[${coin}] Waiting for confirmation of returned funds"
 waitforconfirm ${txid}
@@ -102,7 +102,7 @@ echo "[${coin}] Returned funds confirmed"
 
 echo "[${coin}] Splitting out 100 UTXOs"
 txid=$(./splitfunds.sh ${coin} 100 | jq -r .txid)
-echo "[${coin}] Split broadcast: ${txid}"
+echo "[${coin}] Split broadcast TXID: ${txid}"
 
 echo "[${coin}] Waiting for confirmation of UTXO split"
 waitforconfirm ${txid}
