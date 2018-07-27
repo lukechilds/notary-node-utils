@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/komodo/src/pubkey.txt
+pubkey=$(cat pubkey.txt)
 
 coin="GAME"
 daemon="gamecreditsd -pubkey=${pubkey}"
