@@ -6,5 +6,5 @@ args="$@"
 
 ./listassetchains | while read chain; do
   echo ${chain}
-  ${cli} --ac_name=${chain} ${args}
+  ${cli} -ac_name=${chain} ${args}
 done
