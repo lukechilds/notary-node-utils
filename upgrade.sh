@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${BASH_SOURCE%/*}" || exit
 
 echo "Requesting root..."
 sudo true

@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${BASH_SOURCE%/*}" || exit
 
 # Coin we're resetting
 # e.g "KMD"

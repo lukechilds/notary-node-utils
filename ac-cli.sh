@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+cd "${BASH_SOURCE%/*}" || exit
 
 cli="komodo-cli"
 args="$@"

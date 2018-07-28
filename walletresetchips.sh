@@ -1,6 +1,7 @@
 #!/bin/bash
+cd "${BASH_SOURCE%/*}" || exit
 
-source ~/komodo/src/pubkey.txt
+pubkey=$(cat pubkey.txt)
 
 coin="CHIPS"
 daemon="chipsd -pubkey=${pubkey}"

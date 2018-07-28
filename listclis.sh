@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${BASH_SOURCE%/*}" || exit
 
 # Optionally just get the cli for a single coin
 # e.g "KMD"
