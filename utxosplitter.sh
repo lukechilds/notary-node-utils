@@ -37,7 +37,13 @@ echo "----------------------------------------"
 
     if [[ ${utxo_required} -gt ${split_threshold} ]]; then
       echo "[${coin}] Splitting ${utxo_required} extra UTXOs"
-      ./splitfunds.sh ${coin} ${utxo_required}
+      json=$(./splitfunds.sh ${coin} ${utxo_required})
+      txid=$(echo ${json} | jq -r '.txid')
+      if [[ ${txid} = "null" ]]; then
+        echo "[${coin}] Split TXID: ${txid}"
+      else
+        echo "[${coin}] Error: $(echo ${json} | jq -r '.error')"
+      fi
     else
       echo "[${coin}] No action needed"
     fi
