@@ -8,12 +8,17 @@ specific_coin=$1
 target_utxo_count=50
 split_threshold=5
 
+date=$(date +%Y-%m-%d:%H:%M:%S)
+
 calc() {
   awk "BEGIN { print "$*" }"
 }
 
+echo "----------------------------------------"
+echo "Splitting UTXOs - ${date}"
 echo "Targetting ${target_utxo_count} UTXOs"
 echo "Will only split if we're ${split_threshold} under"
+echo "----------------------------------------"
 
 ./listcoins.sh | while read coin; do
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then
