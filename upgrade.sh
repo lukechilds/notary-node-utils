@@ -34,7 +34,7 @@ echo "Importing privkey..."
 ./ac-cli.sh importprivkey $privkey
 
 echo "Updating iguana..."
-(cd ~/SuperNET/iguana && git checkout dev && git pull && ./m_notary > ~/logs/iguana 2>&1)
+(cd ~/SuperNET/iguana && git checkout dev && git pull && ./m_notary "" notary_nosplit > ~/logs/iguana 2>&1)
 
 echo "Init dPoW..."
 (cd ~/komodo/src && ./dpowassets)
