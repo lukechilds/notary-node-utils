@@ -24,7 +24,7 @@ echo "Will only split if we're ${split_threshold} under"
     fi
     amount=$(calc $satoshis/100000000)
 
-    utxo_count=$(${cli} -ac_name=${coin} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
+    utxo_count=$(${cli} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
     echo "[${coin}] Current UTXO count is ${utxo_count}"
 
     utxo_required=$(calc $target_utxo_count-$utxo_count)
