@@ -11,19 +11,18 @@ calc() {
   awk "BEGIN { print "$*" }"
 }
 
+echo "Targetting ${target_utxo_count} UTXOs"
+echo "Will only split if we're ${split_threshold} under"
+
 ./listcoins.sh | while read coin; do
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then
     cli=$(./listclis.sh ${coin})
-
-    echo "[${coin}] Targetting ${target_utxo_count} UTXOs"
-    echo "[${coin}] Will only split if we're ${split_threshold} under"
 
     satoshis=10000
     if [[ ${coin} = "GAME" ]]; then
       satoshis=100000
     fi
     amount=$(calc $satoshis/100000000)
-    echo "[${coin}] UTXO size is ${amount}"
 
     utxo_count=$(${cli} -ac_name=${coin} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
     echo "[${coin}] Current UTXO count is ${utxo_count}"
