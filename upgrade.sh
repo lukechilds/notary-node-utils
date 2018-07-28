@@ -25,7 +25,7 @@ sleep 20
 echo "Starting komodod and assetchains with new binary..."
 ${daemon} > /dev/null 2>&1 &
 sleep 20
-./assetchains.sh > /dev/null 2>&1
+./startassetchains.sh > /dev/null 2>&1
 cd ~/VerusCoin/src/ && ./verusd -pubkey=$pubkey > /dev/null 2>&1 &
 sleep 20
 
