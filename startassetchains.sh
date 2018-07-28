@@ -1,7 +1,7 @@
 #!/bin/bash
 cd "${BASH_SOURCE%/*}" || exit
 
-cli="komodo-cli"
+cli="komodod"
 overide_args="$@"
 pubkey=$(cat pubkey.txt)
 seed_ip=$(getent hosts zero.kolo.supernet.org | awk '{ print $1 }')
