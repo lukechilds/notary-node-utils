@@ -37,7 +37,7 @@ echo "----------------------------------------"
 
     if [[ ${utxo_required} -gt ${split_threshold} ]]; then
       echo "[${coin}] Splitting ${utxo_required} extra UTXOs"
-      echo ./splitfunds ${coin} ${utxo_required}
+      ./splitfunds ${coin} ${utxo_required}
     else
       echo "[${coin}] No action needed"
     fi
