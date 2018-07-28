@@ -39,7 +39,7 @@ echo "----------------------------------------"
       echo "[${coin}] Splitting ${utxo_required} extra UTXOs"
       json=$(./splitfunds.sh ${coin} ${utxo_required})
       txid=$(echo ${json} | jq -r '.txid')
-      if [[ ${txid} = "null" ]]; then
+      if [[ ${txid} != "null" ]]; then
         echo "[${coin}] Split TXID: ${txid}"
       else
         echo "[${coin}] Error: $(echo ${json} | jq -r '.error')"
