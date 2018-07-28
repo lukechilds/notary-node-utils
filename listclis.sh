@@ -7,8 +7,8 @@ specific_coin=$1
 bitcoin_cli="bitcoin-cli"
 chips_cli="chips-cli"
 game_cli="gamecredits-cli"
-verus_cli="$HOME/VerusCoin/src/verusd"
 komodo_cli="komodo-cli"
+verus_cli="${komodo_cli} -ac_name=VRSC"
 
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "BTC" ]]; then
   echo ${bitcoin_cli}
