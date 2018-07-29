@@ -17,7 +17,7 @@ calc() {
 echo "----------------------------------------"
 echo "Splitting UTXOs - ${date}"
 echo "Targetting ${target_utxo_count} UTXOs"
-echo "Will only split if we're ${split_threshold} under"
+echo "Will only split if less than $(calc $target_utxo_count-$utxo_count) UTXOs"
 echo "----------------------------------------"
 
 ./listcoins.sh | while read coin; do
