@@ -33,7 +33,7 @@ echo "----------------------------------------"
     utxo_count=$(${cli} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
     echo "[${coin}] Current UTXO count is ${utxo_count}"
 
-    utxo_required=$(calc $target_utxo_count-$utxo_count)
+    utxo_required=$(calc ${target_utxo_count}-${utxo_count})
 
     if [[ ${utxo_required} -gt ${split_threshold} ]]; then
       echo "[${coin}] Splitting ${utxo_required} extra UTXOs"
