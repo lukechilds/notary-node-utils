@@ -100,12 +100,7 @@ echo "[${coin}] Waiting for confirmation of returned funds"
 waitforconfirm ${txid}
 echo "[${coin}] Returned funds confirmed"
 
-echo "[${coin}] Splitting out 50 UTXOs"
-txid=$(./splitfunds.sh ${coin} 50 | jq -r .txid)
-echo "[${coin}] Split broadcast TXID: ${txid}"
-
-echo "[${coin}] Waiting for confirmation of UTXO split"
-waitforconfirm ${txid}
-echo "[${coin}] UTXO split confirmed"
+echo "[${coin}] Running UTXO splitter"
+./utxosplitter.sh ${coin}
 
 echo "[${coin}] Wallet reset complete!"
