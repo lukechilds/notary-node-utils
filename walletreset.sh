@@ -37,14 +37,16 @@ waitforconfirm () {
   done
 }
 
+echo "[${coin}] Saving the main address privkey to reimport later"
+privkey=$(${cli} dumpprivkey ${address})
+echo "[${coin}] Main address: ${address}"
+echo "[${coin}] Main privkey: ${privkey}"
+
 echo "[${coin}] Generating temp address"
 temp_address=$(${cli} getnewaddress)
 temp_privkey=$(${cli} dumpprivkey ${temp_address})
 echo "[${coin}] Temp address: ${temp_address}"
 echo "[${coin}] Temp privkey: ${temp_privkey}"
-
-echo "[${coin}] Saving the main address privkey to reimport later"
-privkey=$(${cli} dumpprivkey ${address})
 
 echo "[${coin}] Writing the temp privkey to a file incase something goes wrong"
 echo ${temp_privkey} >> "${coin}_temp_privkeys"
