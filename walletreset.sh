@@ -35,7 +35,7 @@ waitforconfirm () {
     sleep 1
     confirmations=$(${cli} gettransaction $1 | jq -r .confirmations)
     # Keep re-broadcasting
-    ${cli} sendrawtransaction $(${cli} getrawtransaction $1) > /dev/null
+    ${cli} sendrawtransaction $(${cli} getrawtransaction $1) > /dev/null 2>&1
   done
 }
 
