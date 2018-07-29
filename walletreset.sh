@@ -100,7 +100,7 @@ echo "[${coin}] Waiting for confirmation of returned funds"
 waitforconfirm ${txid}
 echo "[${coin}] Returned funds confirmed"
 
-echo "[${coin}] Splitting out 100 UTXOs"
+echo "[${coin}] Splitting out 50 UTXOs"
 txid=$(./splitfunds.sh ${coin} 50 | jq -r .txid)
 echo "[${coin}] Split broadcast TXID: ${txid}"
 
