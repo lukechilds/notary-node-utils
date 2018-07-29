@@ -30,11 +30,10 @@ date=$(date +%Y-%m-%d:%H:%M:%S)
 echo "[${coin}] Resetting ${coin} wallet - ${date}"
 
 waitforconfirm () {
-  sleep 15
   confirmations=0
   while [[ ${confirmations} -lt 1 ]]; do
+    sleep 1
     confirmations=$(${cli} gettransaction $1 | jq -r .confirmations)
-    sleep 10
   done
 }
 
@@ -63,7 +62,7 @@ ${cli} stop
 
 stopped=0
 while [[ ${stopped} -eq 0 ]]; do
-  sleep 10
+  sleep 1
   pgrep -af "${daemon_process_regex}" | grep -v "$0" > /dev/null 2>&1
   outcome=$(echo $?)
   if [[ ${outcome} -ne 0 ]]; then
@@ -79,7 +78,7 @@ ${daemon} > /dev/null 2>&1 &
 
 started=0
 while [[ ${started} -eq 0 ]]; do
-  sleep 15
+  sleep 1
   ${cli} getbalance > /dev/null 2>&1
   outcome=$(echo $?)
   if [[ ${outcome} -eq 0 ]]; then
