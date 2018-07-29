@@ -6,7 +6,7 @@ cd "${BASH_SOURCE%/*}" || exit
 specific_coin=$1
 
 target_utxo_count=50
-split_threshold=5
+split_threshold=25
 
 date=$(date +%Y-%m-%d:%H:%M:%S)
 
