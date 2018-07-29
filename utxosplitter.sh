@@ -44,8 +44,6 @@ echo "----------------------------------------"
       else
         echo "[${coin}] Error: $(echo ${json} | jq -r '.error')"
       fi
-    else
-      echo "[${coin}] No action needed"
     fi
   fi
 done
