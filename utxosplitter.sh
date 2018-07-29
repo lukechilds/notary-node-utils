@@ -14,11 +14,13 @@ calc() {
   awk "BEGIN { print "$*" }"
 }
 
-echo "----------------------------------------"
-echo "Splitting UTXOs - ${date}"
-echo "Targetting ${target_utxo_count} UTXOs"
-echo "Will only split if less than ${split_threshold} UTXOs"
-echo "----------------------------------------"
+if [[ -z "${specific_coin}" ]]; then
+  echo "----------------------------------------"
+  echo "Splitting UTXOs - ${date}"
+  echo "Targetting ${target_utxo_count} UTXOs"
+  echo "Will only split if less than ${split_threshold} UTXOs"
+  echo "----------------------------------------"
+fi
 
 ./listcoins.sh | while read coin; do
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then
