@@ -16,9 +16,9 @@ with open(os.getenv('HOME') + '/komodo/src/assetchains.json') as file:
     assetchains = json.load(file)
 
     for chain in assetchains:
-        if chain["ac_name"] in ['BEER', 'PIZZA', 'VOTE2018']:
+        if chain['ac_name'] in ['BEER', 'PIZZA', 'VOTE2018']:
             continue
-        if specific_chain and chain["ac_name"] != specific_chain:
+        if specific_chain and chain['ac_name'] != specific_chain:
             continue
         params = []
         for param, value in chain.items():
