@@ -5,8 +5,11 @@ cd "${BASH_SOURCE%/*}" || exit
 # e.g "KMD"
 specific_coin=$1
 
-target_utxo_count=50
-split_threshold=25
+kmd_target_utxo_count=50
+kmd_split_threshold=25
+
+other_target_utxo_count=20
+other_split_threshold=10
 
 date=$(date +%Y-%m-%d:%H:%M:%S)
 
@@ -17,14 +20,24 @@ calc() {
 if [[ -z "${specific_coin}" ]]; then
   echo "----------------------------------------"
   echo "Splitting UTXOs - ${date}"
-  echo "Targetting ${target_utxo_count} UTXOs"
-  echo "Will only split if less than ${split_threshold} UTXOs"
+  echo "KMD target UTXO count: ${kmd_target_utxo_count}"
+  echo "KMD split threshold: ${kmd_split_threshold}"
+  echo "Other target UTXO count: ${other_target_utxo_count}"
+  echo "Other split threshold: ${other_split_threshold}"
   echo "----------------------------------------"
 fi
 
 ./listcoins.sh | while read coin; do
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then
     cli=$(./listclis.sh ${coin})
+
+    if [[ "${coin}" = "KMD" ]]; then
+      target_utxo_count=$kmd_target_utxo_count
+      split_threshold=$kmd_split_threshold
+    else
+      target_utxo_count=$other_target_utxo_count
+      split_threshold=$other_split_threshold
+    fi
 
     satoshis=10000
     if [[ ${coin} = "GAME" ]]; then
