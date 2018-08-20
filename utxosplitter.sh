@@ -45,7 +45,7 @@ fi
     fi
     amount=$(calc $satoshis/100000000)
 
-    utxo_count=$(${cli} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
+    utxo_count=$(${cli} listunspent | jq --arg amt "$amount" '[.[] | select(.amount==($amt|tonumber))] | length')
     echo "[${coin}] Current UTXO count is ${utxo_count}"
 
     utxo_required=$(calc ${target_utxo_count}-${utxo_count})
