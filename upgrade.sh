@@ -13,8 +13,8 @@ echo "Building latest komodod..."
 (cd ~/komodo/ && git checkout beta && git pull && make clean && ./zcutil/build.sh -j$(nproc))
 
 echo "Symlinking latest komodod binary..."
-sudo ln -sf /home/${USER}/komodo/src/komodo-cli /usr/local/bin/komodo-cli
-sudo ln -sf /home/${USER}/komodo/src/komodod /usr/local/bin/komodod
+sudo ln -sf ${HOME}/komodo/src/komodo-cli /usr/local/bin/komodo-cli
+sudo ln -sf ${HOME}/komodo/src/komodod /usr/local/bin/komodod
 
 echo "Stopping komodod and assetchains..."
 ./ac-cli.sh stop
