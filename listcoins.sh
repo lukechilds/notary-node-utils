@@ -6,4 +6,5 @@ echo "CHIPS"
 echo "GAME"
 echo "VRSC"
 echo "KMD"
+echo "HUSH"
 ./listassetchains
