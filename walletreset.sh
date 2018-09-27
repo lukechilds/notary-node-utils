@@ -27,6 +27,11 @@ address=$6
 
 date=$(date +%Y-%m-%d:%H:%M:%S)
 
+if [[ "${coin}" = "PIRATE" ]]; then
+  echo "[${coin}] ERROR: Cannot reset ${coin} wallet with this method"
+  exit 1
+fi
+
 echo "[${coin}] Resetting ${coin} wallet - ${date}"
 
 waitforconfirm () {
