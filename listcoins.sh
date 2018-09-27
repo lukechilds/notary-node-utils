@@ -7,4 +7,5 @@ echo "GAME"
 echo "VRSC"
 echo "KMD"
 echo "HUSH"
+echo "EMC2"
 ./listassetchains
