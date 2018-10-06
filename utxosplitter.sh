@@ -43,6 +43,9 @@ fi
     if [[ ${coin} = "GAME" ]]; then
       satoshis=100000
     fi
+    if [[ ${coin} = "EMC2" ]]; then
+      satoshis=100000
+    fi
     amount=$(calc $satoshis/100000000)
 
     unlocked_utxos=$(${cli} listunspent | jq -r '.[].amount' | grep ${amount} | wc -l)
