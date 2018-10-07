@@ -10,7 +10,7 @@ cli="komodo-cli"
 daemon="komodod -notary -pubkey=${pubkey}"
 
 echo "Building latest komodod..."
-(cd ~/komodo/ && git checkout beta && git pull && make clean && ./zcutil/build.sh -j12)
+(cd ~/komodo/ && git checkout dev && git pull && make clean && ./zcutil/build.sh -j12)
 
 echo "Symlinking latest komodod binary..."
 sudo ln -sf ${HOME}/komodo/src/komodo-cli /usr/local/bin/komodo-cli
@@ -33,7 +33,7 @@ echo "Importing privkey..."
 ./ac-cli.sh importprivkey $privkey
 
 echo "Updating iguana..."
-(cd ~/SuperNET/iguana && git checkout beta && git pull && ./m_notary "" notary_nosplit > ~/logs/iguana 2>&1)
+(cd ~/SuperNET/iguana && git checkout dev && git pull && ./m_notary "" notary_nosplit > ~/logs/iguana 2>&1)
 
 echo "Init dPoW..."
 (cd ~/komodo/src && ./dpowassets)
