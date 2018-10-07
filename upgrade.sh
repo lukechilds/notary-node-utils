@@ -10,7 +10,7 @@ cli="komodo-cli"
 daemon="komodod -notary -pubkey=${pubkey}"
 
 echo "Building latest komodod..."
-(cd ~/komodo/ && git checkout beta && git pull && make clean && ./zcutil/build.sh -j$(nproc))
+(cd ~/komodo/ && git checkout beta && git pull && make clean && ./zcutil/build.sh -j12)
 
 echo "Symlinking latest komodod binary..."
 sudo ln -sf ${HOME}/komodo/src/komodo-cli /usr/local/bin/komodo-cli
