@@ -29,4 +29,4 @@ echo "Updating iguana..."
 (cd ~/SuperNET/iguana && git checkout dev && git pull && ./m_notary "" notary_nosplit > ~/logs/iguana 2>&1)
 
 echo "Init dPoW..."
-(cd ~/komodo/src && ./dpowassets)
+(cd ~/SuperNET/iguana && ./dpowassets)
