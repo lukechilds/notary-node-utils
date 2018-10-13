@@ -1,9 +1,6 @@
 #!/bin/bash
 cd "${BASH_SOURCE%/*}" || exit
 
-echo "Requesting root..."
-sudo true
-
 pubkey=$(cat pubkey.txt)
 privkey=$(cat privkey.txt)
 cli="komodo-cli"
@@ -11,10 +8,6 @@ daemon="komodod -notary -pubkey=${pubkey}"
 
 echo "Building latest komodod..."
 (cd ~/komodo/ && git checkout dev && git pull && make clean && ./zcutil/build.sh -j12)
-
-echo "Symlinking latest komodod binary..."
-sudo ln -sf ${HOME}/komodo/src/komodo-cli /usr/local/bin/komodo-cli
-sudo ln -sf ${HOME}/komodo/src/komodod /usr/local/bin/komodod
 
 echo "Stopping komodod and assetchains..."
 ./ac-cli.sh stop
