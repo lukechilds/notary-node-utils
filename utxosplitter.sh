@@ -55,7 +55,7 @@ fi
 
     utxo_required=$(calc ${target_utxo_count}-${utxo_count})
 
-    if [[ ${utxo_required} -gt ${split_threshold} ]]; then
+    if [[ ${utxo_count} -le ${split_threshold} ]]; then
       echo "[${coin}] Splitting ${utxo_required} extra UTXOs"
       json=$(./splitfunds.sh ${coin} ${utxo_required})
       txid=$(echo ${json} | jq -r '.txid')
