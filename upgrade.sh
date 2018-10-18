@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 cd "${BASH_SOURCE%/*}" || exit
 
 pubkey=$(cat pubkey.txt)
