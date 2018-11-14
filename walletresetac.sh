@@ -6,14 +6,8 @@ pubkey=$(cat pubkey.txt)
 # Coin we're resetting
 coin=$1
 
-if [[ $coin == "KMDICE" ]]; then
-  daemon="fsm-komodod $(./listassetchainparams ${coin}) -pubkey=${pubkey}"
-  daemon_process_regex="fsm-komodod.*\-ac_name=${coin}"
-else
-  daemon="komodod $(./listassetchainparams ${coin}) -pubkey=${pubkey}"
-  daemon_process_regex="komodod.*\-ac_name=${coin}"
-fi
-
+daemon="komodod $(./listassetchainparams ${coin}) -pubkey=${pubkey}"
+daemon_process_regex="komodod.*\-ac_name=${coin}"
 cli="komodo-cli -ac_name=${coin}"
 wallet_file="${HOME}/.komodo/${coin}/wallet.dat"
 nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
