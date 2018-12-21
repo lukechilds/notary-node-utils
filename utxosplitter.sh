@@ -17,6 +17,16 @@ calc() {
   awk "BEGIN { print "$*" }"
 }
 
+waitforconfirm () {
+  confirmations=0
+  while [[ ${confirmations} -lt 1 ]]; do
+    sleep 1
+    confirmations=$(${cli} gettransaction $1 | jq -r .confirmations)
+    # Keep re-broadcasting
+    ${cli} sendrawtransaction $(${cli} getrawtransaction $1) > /dev/null 2>&1
+  done
+}
+
 if [[ -z "${specific_coin}" ]]; then
   echo "----------------------------------------"
   echo "Splitting UTXOs - ${date}"
@@ -29,6 +39,7 @@ fi
 
 ./listcoins.sh | while read coin; do
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then
+    is_assetchain=$(./listassetchains | grep -w ${coin})
     cli=$(./listclis.sh ${coin})
 
     if [[ "${coin}" = "KMD" ]]; then
@@ -52,6 +63,16 @@ fi
     locked_utxos=$(${cli} listlockunspent | jq -r length)
     utxo_count=$(calc ${unlocked_utxos}+${locked_utxos})
     echo "[${coin}] Current UTXO count is ${utxo_count}"
+
+    if [[ ${utxo_count} = 0 ]] && [[ $is_assetchain ]]; then
+      echo "[${coin}] Sending entire balance back to main address"
+      txid=$(${cli} sendtoaddress RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3 $(${cli} getbalance) "" "" true)
+      echo "[${coin}] Balance returned TXID: ${txid}"
+
+      echo "[${coin}] Waiting for confirmation of returned funds"
+      waitforconfirm ${txid}
+      echo "[${coin}] Returned funds confirmed"
+    fi
 
     utxo_required=$(calc ${target_utxo_count}-${utxo_count})
 
