@@ -10,6 +10,7 @@ chips_cli="chips-cli"
 game_cli="gamecredits-cli"
 hush_cli="hush-cli"
 einsteinium_cli="einsteinium-cli"
+gincoin_cli="gincoin-cli"
 komodo_cli="komodo-cli"
 verus_cli="${komodo_cli} -ac_name=VRSC"
 
@@ -27,6 +28,9 @@ if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "HUSH" ]]; then
 fi
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "EMC2" ]]; then
   echo ${einsteinium_cli}
+fi
+if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "GIN" ]]; then
+  echo ${gincoin_cli}
 fi
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "VRSC" ]]; then
   echo ${verus_cli}

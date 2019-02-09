@@ -8,4 +8,5 @@ echo "VRSC"
 echo "KMD"
 echo "HUSH"
 echo "EMC2"
+echo "GIN"
 ./listassetchains
