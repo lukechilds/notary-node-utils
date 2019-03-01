@@ -17,6 +17,8 @@ mining_rewards=$(${cli} listunspent | jq -r 'map(select(.spendable == true and .
 no_of_mining_utxos=$(echo $mining_rewards | jq -r 'length')
 total_mining_rewards=$(echo $mining_rewards | jq -r '[ .[].amount ] | add')
 
+# also consolidate iguana utxos once they're over a certain age
+
 echo "[${coin}] ${no_of_mining_utxos} mining UTXOs totalling ${total_mining_rewards} ${coin}"
 
 if [[ $no_of_mining_utxos -gt 1 ]]; then
