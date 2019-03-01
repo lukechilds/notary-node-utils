@@ -14,4 +14,4 @@ cli=$(./listclis.sh ${coin})
 result=$($cli cleanwallettransactions)
 result_formatted=$(echo $result | jq -r '"Total Transactions: \(.total_transactons) | Remaining Transactions: \(.remaining_transactons) | Removed Transactions: \(.removed_transactions)"')
 
-echo "[$coin] $(date) $result_formatted"
+echo "[$coin] $(date) | $result_formatted"
