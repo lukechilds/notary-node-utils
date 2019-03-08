@@ -10,7 +10,7 @@ address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
 cli=$(./listclis.sh ${coin})
 txfee="0.0002"
 date=$(date +%Y-%m-%d:%H:%M:%S)
-iguana_age_threshold="120"
+iguana_age_threshold="100"
 
 echo "[${coin}] Checking mining UTXOs - ${date}"
 
