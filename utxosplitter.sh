@@ -8,6 +8,9 @@ coin=$1
 kmd_target_utxo_count=75
 kmd_split_threshold=50
 
+btc_target_utxo_count=20
+btc_split_threshold=10
+
 other_target_utxo_count=10
 other_split_threshold=5
 
@@ -22,6 +25,8 @@ if [[ -z "${coin}" ]]; then
   echo "Splitting UTXOs - ${date}"
   echo "KMD target UTXO count: ${kmd_target_utxo_count}"
   echo "KMD split threshold: ${kmd_split_threshold}"
+  echo "BTC target UTXO count: ${btc_target_utxo_count}"
+  echo "BTC split threshold: ${btc_split_threshold}"
   echo "Other target UTXO count: ${other_target_utxo_count}"
   echo "Other split threshold: ${other_split_threshold}"
   echo "----------------------------------------"
@@ -37,6 +42,9 @@ cli=$(./listclis.sh ${coin})
 if [[ "${coin}" = "KMD" ]]; then
   target_utxo_count=$kmd_target_utxo_count
   split_threshold=$kmd_split_threshold
+elif [[ "${coin}" = "BTC" ]]; then
+  target_utxo_count=$btc_target_utxo_count
+  split_threshold=$btc_split_threshold
 else
   target_utxo_count=$other_target_utxo_count
   split_threshold=$other_split_threshold
