@@ -5,13 +5,13 @@ cd "${BASH_SOURCE%/*}" || exit
 # e.g "KMD"
 specific_coin=$1
 
+komodo_cli="komodo-cli"
 bitcoin_cli="bitcoin-cli"
 chips_cli="chips-cli"
 game_cli="gamecredits-cli"
-hush_cli="hush-cli"
+hush3_cli="${komodo_cli} -ac_name=HUSH3"
 einsteinium_cli="einsteinium-cli"
 gincoin_cli="gincoin-cli"
-komodo_cli="komodo-cli"
 verus_cli="${komodo_cli} -ac_name=VRSC"
 
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "BTC" ]]; then
@@ -23,8 +23,8 @@ fi
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "GAME" ]]; then
   echo ${game_cli}
 fi
-if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "HUSH" ]]; then
-  echo ${hush_cli}
+if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "HUSH3" ]]; then
+  echo ${hush3_cli}
 fi
 if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "EMC2" ]]; then
   echo ${einsteinium_cli}

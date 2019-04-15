@@ -6,7 +6,7 @@ echo "CHIPS"
 echo "GAME"
 echo "VRSC"
 echo "KMD"
-echo "HUSH"
+echo "HUSH3"
 echo "EMC2"
 echo "GIN"
 ./listassetchains
