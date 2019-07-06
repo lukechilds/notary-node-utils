@@ -21,8 +21,11 @@ if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "KMD" ]]; then
   echo ${komodo_cli}
 fi
 
-# Assetchains
+# Bitcoin and assetchains
 if [[ "${server_type}" = "primary" ]]; then
+  if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "BTC" ]]; then
+    echo ${bitcoin_cli}
+  fi
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "HUSH3" ]]; then
     echo ${hush3_cli}
   fi
@@ -35,9 +38,6 @@ fi
 
 # 3rd party daemons
 if [[ "${server_type}" = "secondary" ]]; then
-  if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "BTC" ]]; then
-    echo ${bitcoin_cli}
-  fi
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "CHIPS" ]]; then
     echo ${chips_cli}
   fi

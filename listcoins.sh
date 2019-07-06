@@ -6,15 +6,15 @@ server_type=$(cat server_type.txt)
 # Komodo
 echo "KMD"
 
-# Assetchains
+# Bitcoin and assetchains
 if [[ "${server_type}" = "primary" ]]; then
+  echo "BTC"
   echo "HUSH3"
   ./listassetchains
 fi
 
 # 3rd party daemons
 if [[ "${server_type}" = "secondary" ]]; then
-  echo "BTC"
   echo "CHIPS"
   echo "GAME"
   echo "EMC2"
