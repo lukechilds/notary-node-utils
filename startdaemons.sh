@@ -5,7 +5,11 @@ server_type=$(cat server_type.txt)
 pubkey=$(cat pubkey.txt)
 
 # Komodo
-komodod -gen -genproclimit=1 -notary -pubkey=$pubkey &
+mining_args=""
+if [[ "${server_type}" = "primary" ]]; then
+  mining_args="-gen -genproclimit=1"
+fi
+komodod $mining_args -notary -pubkey=$pubkey &
 
 # Bitcoin and assetchains
 if [[ "${server_type}" = "primary" ]]; then
