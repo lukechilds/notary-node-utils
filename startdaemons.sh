@@ -16,4 +16,4 @@ verusd -pubkey=$pubkey &
 
 # Assetchains
 hushd -pubkey=$pubkey &
-./startassetchains &
+./startassetchains.sh &
