@@ -1,12 +1,23 @@
 #!/bin/bash
 cd "${BASH_SOURCE%/*}" || exit
 
-echo "BTC"
-echo "CHIPS"
-echo "GAME"
-echo "VRSC"
+server_type=$(cat server_type.txt)
+
+# Komodo
 echo "KMD"
-echo "HUSH3"
-echo "EMC2"
-echo "GIN"
-./listassetchains
+
+# Assetchains
+if [[ "${server_type}" = "primary" ]]; then
+  echo "HUSH3"
+  ./listassetchains
+fi
+
+# 3rd party daemons
+if [[ "${server_type}" = "secondary" ]]; then
+  echo "BTC"
+  echo "CHIPS"
+  echo "GAME"
+  echo "EMC2"
+  echo "GIN"
+  echo "VRSC"
+fi
