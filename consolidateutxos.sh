@@ -27,6 +27,11 @@ amount_of_utxos=$(echo "$total_mining_rewards+$total_iguana_utxos" | bc)
 if [[ $no_of_utxos -gt 1 ]]; then
   output_amount=$(echo "$amount_of_utxos-$txfee" | bc)
 
+  # Add a 0 if output amount starts with a decimal place
+  if [[ "${output_amount:0:1}" = "." ]]; then
+    output_amount="0${output_amount}"
+  fi
+
   transaction_inputs=$(jq -r --argjson mining_rewards "$mining_rewards" --argjson old_igunan_utxos "$old_igunan_utxos" -n '$mining_rewards + $old_igunan_utxos | [.[] | {txid, vout}]')
   transaction_outputs="{\"$address\":$output_amount}"
 
