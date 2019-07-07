@@ -8,8 +8,8 @@ coin=$1
 kmd_target_utxo_count=75
 kmd_split_threshold=50
 
-btc_target_utxo_count=100
-btc_split_threshold=50
+btc_target_utxo_count=500
+btc_split_threshold=250
 
 other_target_utxo_count=10
 other_split_threshold=5
