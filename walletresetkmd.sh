@@ -8,7 +8,7 @@ daemon="komodod -notary -pubkey=${pubkey}"
 daemon_process_regex="komodod.*\-notary"
 cli="komodo-cli"
 wallet_file="${HOME}/.komodo/wallet.dat"
-nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
+nn_address=$(cat kmd_address.txt)
 
 ./walletreset.sh \
   "${coin}" \

@@ -10,7 +10,7 @@ daemon="komodod $(./listassetchainparams ${coin}) -pubkey=${pubkey}"
 daemon_process_regex="komodod.*\-ac_name=${coin}"
 cli="komodo-cli -ac_name=${coin}"
 wallet_file="${HOME}/.komodo/${coin}/wallet.dat"
-nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
+nn_address=$(cat kmd_address.txt)
 
 ./walletreset.sh \
   "${coin}" \

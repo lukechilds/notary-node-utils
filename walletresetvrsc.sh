@@ -8,7 +8,7 @@ daemon="${HOME}/VerusCoin/src/verusd -pubkey=${pubkey}"
 daemon_process_regex="verusd.*\-pubkey"
 cli="komodo-cli -ac_name=VRSC"
 wallet_file="${HOME}/.komodo/VRSC/wallet.dat"
-nn_address="RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3"
+nn_address=$(cat kmd_address.txt)
 
 ./walletreset.sh \
   "${coin}" \
