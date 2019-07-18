@@ -11,7 +11,6 @@ komodo_cli="komodo-cli"
 bitcoin_cli="bitcoin-cli"
 chips_cli="chips-cli"
 game_cli="gamecredits-cli"
-hush3_cli="${komodo_cli} -ac_name=HUSH3"
 einsteinium_cli="einsteinium-cli"
 gincoin_cli="gincoin-cli"
 verus_cli="${komodo_cli} -ac_name=VRSC"
@@ -25,9 +24,6 @@ fi
 if [[ "${server_type}" = "primary" ]]; then
   if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "BTC" ]]; then
     echo ${bitcoin_cli}
-  fi
-  if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "HUSH3" ]]; then
-    echo ${hush3_cli}
   fi
   ./listassetchains | while read coin; do
     if [[ -z "${specific_coin}" ]] || [[ "${specific_coin}" = "${coin}" ]]; then

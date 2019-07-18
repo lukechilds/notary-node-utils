@@ -9,7 +9,6 @@ echo "KMD"
 # Bitcoin and assetchains
 if [[ "${server_type}" = "primary" ]]; then
   echo "BTC"
-  echo "HUSH3"
   ./listassetchains
 fi
 
