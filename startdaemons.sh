@@ -9,7 +9,8 @@ mining_args=""
 if [[ "${server_type}" = "primary" ]]; then
   mining_args="-gen -genproclimit=1"
 fi
-komodod $mining_args -notary -pubkey=$pubkey &
+spam_prevention_args="-minrelaytxfee=0.000035 -opretmintxfee=0.004"
+komodod $mining_args $spam_prevention_args -notary -pubkey=$pubkey &
 
 # Bitcoin and assetchains
 if [[ "${server_type}" = "primary" ]]; then
